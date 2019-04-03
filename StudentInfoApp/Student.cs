@@ -9,48 +9,41 @@ namespace StudentInfoApp
     /// </summary>
     class Student
     {
+        #region statics
+        private static int lastId = 0;
+        #endregion
         #region Properties
         /// <summary>
         /// unique id for student
         /// </summary>
-        public int id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// student first and last name
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// address of student 
         /// </summary>
-        public string address { get; set; }
+        public string Address { get; set; }
         /// <summary>
         /// email address of student 
         /// </summary>
-        public string email { get; set; }
+        public string Email { get; set; }
         /// <summary>
         /// date of birth of student
         /// </summary>
-        public DateTime dob { get; set; }
-        /// <summary>
-        /// List of courses taken by student
-        /// </summary>
-        public List<Course> courseList;
-      
+        public DateTime Dob { get; set; }
+        
         #endregion
 
+        #region Constructor
+        public Student()
+        {
+            Id = ++lastId;
+        }
+        #endregion
         #region Methods
-        /// <summary>
-        /// method to calculate GPA of a student
-        /// </summary>
-        public double CalculateGPA ()
-        {
-        }
-        /// <summary>
-        /// method to add course and score to student profile
-        /// </summary>
-        /// <param name="course">object of class Course</param>
-        public void AddCourse (Course course)
-        {
-        }
+        
         #endregion
     }
 }
