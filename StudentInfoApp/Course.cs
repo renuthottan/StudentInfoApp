@@ -5,28 +5,36 @@ using System.Text;
 namespace StudentInfoApp
 {
     /// <summary>
-    /// Course holds infor about all available courses
+    /// Course holds information about all available courses
     /// Can add new courses
     /// </summary>
     class Course
     {
+        #region statics
+        private static int lastId = 0;
+        #endregion
+
         #region Properties
         /// <summary>
         /// unique id of the course
         /// </summary>
-        public int id { get; set; }
+        public int Id { get; private set; }
         /// <summary>
         /// name of the course
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// no of credit hours for the course
         /// </summary>
-        public int creditHours { get; set; }
-        /// <summary>
-        /// Add new score to student profile
-        /// </summary>
-        public double studentScore { get; set; }
+        public int CreditHours { get; set; }
+
+        #endregion
+
+        #region Constructor
+        public Course()
+        {
+            Id = ++lastId;
+        }
         #endregion
 
     }

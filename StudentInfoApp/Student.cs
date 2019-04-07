@@ -4,6 +4,7 @@ using System.Text;
 
 namespace StudentInfoApp
 {
+    
     /// <summary>
     /// Student class holds all student information
     /// </summary>
@@ -33,6 +34,8 @@ namespace StudentInfoApp
         /// date of birth of student
         /// </summary>
         public DateTime Dob { get; set; }
+
+        public List<CourseScore> courseList;
         
         #endregion
 
@@ -46,4 +49,11 @@ namespace StudentInfoApp
         
         #endregion
     }
+
+
+    class CourseScore
+    {
+        int CourseId;
+        int Score;
+    };
 }
