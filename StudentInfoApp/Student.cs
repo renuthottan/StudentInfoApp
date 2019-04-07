@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StudentInfoApp
 {
-    
+
     /// <summary>
     /// Student class holds all student information
     /// </summary>
@@ -36,24 +36,38 @@ namespace StudentInfoApp
         public DateTime Dob { get; set; }
 
         public List<CourseScore> courseList;
-        
+
         #endregion
 
         #region Constructor
         public Student()
         {
             Id = ++lastId;
+            courseList = new List<CourseScore>();
+        }       
+
+    
+    #endregion
+    #region Methods
+
+    public void AddScore(int cId, int score)
+        {
+            var cs = new CourseScore
+            {
+                CourseId = cId,
+                Score = score
+            };
+            courseList.Add(cs);
         }
-        #endregion
-        #region Methods
-        
+
         #endregion
     }
 
 
     class CourseScore
     {
-        int CourseId;
-        int Score;
+        public int CourseId;
+        public int Score;
+    
     };
 }

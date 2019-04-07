@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace StudentInfoApp
@@ -53,5 +54,24 @@ namespace StudentInfoApp
         {
             return courses;
         }
+
+        public static void AddStudentScore(int sId, int cId, int score)
+        {
+            var student = GetStudentByStudentId(sId);
+            student.AddScore(cId, score);
+        }
+
+        public static Student GetStudentByStudentId(int sId)
+        {
+            var student = students.SingleOrDefault(s => s.Id == sId);
+            if (student == null)
+            {
+                return null;
+            }
+            return student;
+        }
+
+       
+
     }
 }

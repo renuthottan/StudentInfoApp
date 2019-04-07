@@ -64,8 +64,17 @@ namespace StudentInfoApp
                         break;
 
                     case "5":
+                        Console.Write("Student ID ");
+                        var sId = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Course ID ");
+                        var cId = Convert.ToInt32(Console.ReadLine());
+                        Console.Write("Score ");
+                        var score = Convert.ToInt32(Console.ReadLine());
+                        Admin.AddStudentScore(sId, cId, score);
+                        Console.WriteLine("Student score successfully completed!");
                         break;
                     case "6":
+                       
                         break;
                     default:
                         break;
@@ -76,5 +85,5 @@ namespace StudentInfoApp
 
         }
     }
-        
+    
 }
