@@ -28,16 +28,28 @@ namespace StudentInfoApp
                         return;
 
                     case "1":
-                        Console.Write("Name ");
-                        var name = Console.ReadLine();
-                        Console.Write("Address ");
-                        var address = Console.ReadLine();
-                        Console.Write("Email ");
-                        var email = Console.ReadLine();
-                        Console.Write("Date of Birth mm/dd/yyyy ");
-                        var dob = DateTime.Parse(Console.ReadLine());
-                        var s1 = Admin.AddStudent(name, address, email, dob);
-                        Console.WriteLine($"Student ID : {s1.Id}, Name: {s1.Name}, Address: {s1.Address}, Email: {s1.Email}, DOB: {s1.Dob} ");
+                        try
+                        {
+                            Console.Write("Name ");
+                            var name = Console.ReadLine();
+                            Console.Write("Address ");
+                            var address = Console.ReadLine();
+                            Console.Write("Email ");
+                            var email = Console.ReadLine();
+                            Console.Write("Date of Birth mm/dd/yyyy ");
+                            var dob = DateTime.Parse(Console.ReadLine());
+                            var s1 = Admin.AddStudent(name, address, email, dob);
+                            Console.WriteLine($"Student ID : {s1.Id}, Name: {s1.Name}, Address: {s1.Address}, Email: {s1.Email}, DOB: {s1.Dob} ");
+                        }
+                        catch (ArgumentNullException nx)
+                        {
+                            Console.WriteLine($"Please enter valid input. {nx.Message}");
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Sorry something went wrong- {ex.Message}");
+                        }
                         break;
 
                     case "2":
@@ -47,12 +59,24 @@ namespace StudentInfoApp
                         break;
 
                     case "3":
-                        Console.Write("Course name ");
-                        var cName = Console.ReadLine();
-                        Console.Write("Credit hours ");
-                        var creditHours = Convert.ToInt32(Console.ReadLine());
-                        var c1 = Admin.AddCourse(cName, creditHours);
-                        Console.WriteLine($" Course ID : {c1.Id}, Course Name: {c1.Name}, Credit Hours: {c1.CreditHours} ");
+                        try
+                        {
+                            Console.Write("Course name ");
+                            var cName = Console.ReadLine();
+                            Console.Write("Credit hours ");
+                            var creditHours = Convert.ToInt32(Console.ReadLine());
+                            var c1 = Admin.AddCourse(cName, creditHours);
+                            Console.WriteLine($" Course ID : {c1.Id}, Course Name: {c1.Name}, Credit Hours: {c1.CreditHours} ");
+
+                        }
+                        catch (ArgumentNullException nx)
+                        {
+                            Console.WriteLine($"Please enter valid input. {nx.Message}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Sorry something went wrong- {ex.Message}");
+                        }
                         break;
 
                     case "4":
@@ -62,23 +86,46 @@ namespace StudentInfoApp
                         break;
 
                     case "5":
-                        Console.Write("Student ID ");
-                        var sId = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Course ID ");
-                        var cId = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Score ");
-                        var score = Convert.ToInt32(Console.ReadLine());
-                        Admin.AddStudentScore(sId, cId, score);
-                        Console.WriteLine("Student score successfully added!");
+                        try
+                        {
+                            Console.Write("Student ID ");
+                            var sId = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Course ID ");
+                            var cId = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Score ");
+                            var score = Convert.ToInt32(Console.ReadLine());
+                            Admin.AddStudentScore(sId, cId, score);
+                            Console.WriteLine("Student score successfully added!");
+                        }
+                        catch (ArgumentNullException nx)
+                        {
+                            Console.WriteLine($"Please enter valid input. {nx.Message}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Sorry something went wrong- {ex.Message}");
+                        }
                         break;
+                        ;
 
                     case "6":
-                        Console.Write("Student ID ");
-                        var studentId = Convert.ToInt32(Console.ReadLine());
-                        var s2 =  Admin.GetStudentByStudentId(studentId);
-                        Console.WriteLine($"Student ID : {s2.Id}, Student Name: {s2.Name}");
-                        foreach (var courseScore in s2.scoreList)
-                            Console.WriteLine($"Course ID : {courseScore.CourseId}, Score: {courseScore.Score}");
+                        try
+                        {
+                            Console.Write("Student ID ");
+                            var studentId = Convert.ToInt32(Console.ReadLine());
+                            var s2 = Admin.GetStudentByStudentId(studentId);
+                            Console.WriteLine($"Student ID : {s2.Id}, Student Name: {s2.Name}");
+                            foreach (var courseScore in s2.scoreList)
+                                Console.WriteLine($"Course ID : {courseScore.CourseId}, Score: {courseScore.Score}");
+                        }
+                        catch (ArgumentNullException nx)
+                        {
+                            Console.WriteLine($"Please enter valid input. {nx.Message}");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Sorry something went wrong- {ex.Message}");
+                        }
                         break;
 
                     default:

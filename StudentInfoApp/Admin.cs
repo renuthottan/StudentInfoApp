@@ -23,6 +23,18 @@ namespace StudentInfoApp
         /// <returns>newly created student account</returns>
         public static Student AddStudent(string name, string address, string email, DateTime dob)
         {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("name", "Name is required!");
+            }
+            if (string.IsNullOrEmpty(address) || string.IsNullOrWhiteSpace(address))
+            {
+                throw new ArgumentNullException("address", "Address is required!");
+            }
+            if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentNullException("email", "Email address is required!");
+            }
             var s1 = new Student
             {
                 Name = name,
@@ -51,6 +63,9 @@ namespace StudentInfoApp
         /// <returns>newly created course</returns>
         public static Course AddCourse(string name, int creditHours)
         {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException("name", "Name is required!");
+            
             var c1 = new Course
             {
                 Name = name,
