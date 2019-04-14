@@ -9,7 +9,13 @@ namespace StudentInfoApp
     /// Student class holds all student information
     /// </summary>
     class Student
+
     {
+        /// <summary>
+        /// list to store courses taken and scores  obtained by a student
+        /// </summary>
+        public List<CourseScore> scoreList;
+
         #region statics
         private static int lastId = 0;
         #endregion
@@ -34,36 +40,37 @@ namespace StudentInfoApp
         /// date of birth of student
         /// </summary>
         public DateTime Dob { get; set; }
-
-        public List<CourseScore> courseList;
-
         #endregion
 
         #region Constructor
         public Student()
         {
             Id = ++lastId;
-            courseList = new List<CourseScore>();
+            scoreList = new List<CourseScore>();
         }       
+        #endregion
 
-    
-    #endregion
-    #region Methods
-
-    public void AddScore(int cId, int score)
+        #region Methods
+        /// <summary>
+        /// Adds new course and score to an existing student
+        /// </summary>
+        /// <param name="cId">course id</param>
+        /// <param name="score">score obtained by student</param>
+        public void AddScore(int cId, int score)
         {
             var cs = new CourseScore
             {
                 CourseId = cId,
                 Score = score
             };
-            courseList.Add(cs);
+            scoreList.Add(cs);
+        }
+        #endregion
         }
 
-        #endregion
-    }
-
-
+    /// <summary>
+    /// Holds course ID and score obtained by the student
+    /// </summary>
     class CourseScore
     {
         public int CourseId;

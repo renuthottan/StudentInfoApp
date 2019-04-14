@@ -14,13 +14,13 @@ namespace StudentInfoApp
         public static List<Course> courses = new List<Course>();
 
         /// <summary>
-        /// Static method to add a new student to the list of students
+        /// Adds new student
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="address"></param>
-        /// <param name="email"></param>
-        /// <param name="dob"></param>
-        /// <returns></returns>
+        /// <param name="name">name of student</param>
+        /// <param name="address">address of student</param>
+        /// <param name="email">email of student</param>
+        /// <param name="dob">date of birth of student</param>
+        /// <returns>newly created student account</returns>
         public static Student AddStudent(string name, string address, string email, DateTime dob)
         {
             var s1 = new Student
@@ -34,11 +34,21 @@ namespace StudentInfoApp
             return s1;
         }
 
+        /// <summary>
+        /// Obtain all students info
+        /// </summary>
+        /// <returns>list of students</returns>
         public static IEnumerable<Student> GetAllStudents()
         {
             return students;
         }
 
+        /// <summary>
+        /// Adds new course
+        /// </summary>
+        /// <param name="name">Course name</param>
+        /// <param name="creditHours">credit hours for the course</param>
+        /// <returns>newly created course</returns>
         public static Course AddCourse(string name, int creditHours)
         {
             var c1 = new Course
@@ -50,17 +60,32 @@ namespace StudentInfoApp
             return c1;
         }
 
+        /// <summary>
+        /// Obtain all course info
+        /// </summary>
+        /// <returns>list of courses</returns>
         public  static IEnumerable<Course> GetAllCourses()
         {
             return courses;
         }
 
+        /// <summary>
+        /// Adds score and course details to existing student profile
+        /// </summary>
+        /// <param name="sId">student id</param>
+        /// <param name="cId">course id of course taken by student</param>
+        /// <param name="score">score obtained by student for particular course</param>
         public static void AddStudentScore(int sId, int cId, int score)
         {
             var student = GetStudentByStudentId(sId);
             student.AddScore(cId, score);
         }
 
+        /// <summary>
+        /// Obtain student details using student ID
+        /// </summary>
+        /// <param name="sId">Id of student</param>
+        /// <returns>student account</returns>
         public static Student GetStudentByStudentId(int sId)
         {
             var student = students.SingleOrDefault(s => s.Id == sId);
