@@ -7,7 +7,7 @@ namespace StudentInfoApp
 {
     class AdminContext : DbContext
     {
-        public DbSet<Student> Students{ get; set; }
+        public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseScore> CourseScores { get; set; }
 

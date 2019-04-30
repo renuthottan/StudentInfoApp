@@ -117,10 +117,12 @@ namespace StudentInfoApp
                         {
                             Console.Write("Student ID ");
                             var studentId = Convert.ToInt32(Console.ReadLine());
-                            var s2 = Admin.GetStudentByStudentId(studentId);
-                            Console.WriteLine($"Student ID : {s2.Id}, Student Name: {s2.Name}");
-                            foreach (var courseScore in s2.scoreList)
-                                Console.WriteLine($"Course ID : {courseScore.CourseId}, Score: {courseScore.Score}");
+                            
+                            var studentScores = Admin.GetScoresForStudent(studentId);
+                            foreach (var score in studentScores)
+                            {
+                                Console.WriteLine($"Index: {score.Id},Student Id: {score.StudentId}, Course Id: {score.CourseId}, Score: {score.Score}");
+                            }
                         }
                         catch (ArgumentNullException nx)
                         {

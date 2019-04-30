@@ -10,8 +10,7 @@ namespace StudentInfoApp
     /// </summary>
     static class Admin
     {
-        public static List<Student> students = new List<Student>();
-        public static List<Course> courses = new List<Course>();
+        private static AdminContext db = new AdminContext();
 
         /// <summary>
         /// Adds new student
@@ -42,7 +41,10 @@ namespace StudentInfoApp
                 Email = email,
                 Dob = dob
             };
-            students.Add(s1);
+
+            db.Students.Add(s1);
+            db.SaveChanges();
+
             return s1;
         }
 
@@ -52,7 +54,7 @@ namespace StudentInfoApp
         /// <returns>list of students</returns>
         public static IEnumerable<Student> GetAllStudents()
         {
-            return students;
+            return db.Students;
         }
 
         /// <summary>
@@ -71,7 +73,8 @@ namespace StudentInfoApp
                 Name = name,
                 CreditHours = creditHours
             };
-            courses.Add(c1);
+            db.Courses.Add(c1);
+            db.SaveChanges();
             return c1;
         }
 
@@ -81,7 +84,7 @@ namespace StudentInfoApp
         /// <returns>list of courses</returns>
         public  static IEnumerable<Course> GetAllCourses()
         {
-            return courses;
+            return db.Courses;
         }
 
         /// <summary>
@@ -93,7 +96,14 @@ namespace StudentInfoApp
         public static void AddStudentScore(int sId, int cId, int score)
         {
             var student = GetStudentByStudentId(sId);
-            student.AddScore(sId, cId, score);
+            var cs = new CourseScore
+            {
+                StudentId = sId,
+                CourseId = cId,
+                Score = score
+            };
+            db.CourseScores.Add(cs);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -103,7 +113,7 @@ namespace StudentInfoApp
         /// <returns>student account</returns>
         public static Student GetStudentByStudentId(int sId)
         {
-            var student = students.SingleOrDefault(s => s.Id == sId);
+            var student = db.Students.SingleOrDefault(s => s.Id == sId);
             if (student == null)
             {
                 return null;
@@ -111,7 +121,14 @@ namespace StudentInfoApp
             return student;
         }
 
-       
+        public static IEnumerable<CourseScore>
+            GetScoresForStudent(int sId)
+        {
+            return db.CourseScores
+                .Where(c => c.StudentId == sId);
+        }
+
+
 
     }
 }

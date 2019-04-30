@@ -10,10 +10,7 @@ namespace StudentInfoApp
     /// </summary>
     class Course
     {
-        #region statics
-        private static int lastId = 0;
-        #endregion
-
+        
         #region Properties
         /// <summary>
         /// unique id of the course
@@ -30,12 +27,7 @@ namespace StudentInfoApp
 
         #endregion
 
-        #region Constructor
-        public Course()
-        {
-            Id = ++lastId;
-        }
-        #endregion
+        
 
     }
 
