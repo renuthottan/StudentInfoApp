@@ -73,6 +73,10 @@ namespace StudentInfoApp
                         {
                             Console.WriteLine($"Please enter valid input. {nx.Message}");
                         }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine($"CreditHour error. Please provide valid credit hours. Try again");
+                        }
                         catch (Exception ex)
                         {
                             Console.WriteLine($"Sorry something went wrong- {ex.Message}");

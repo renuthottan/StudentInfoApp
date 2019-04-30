@@ -93,7 +93,7 @@ namespace StudentInfoApp
         public static void AddStudentScore(int sId, int cId, int score)
         {
             var student = GetStudentByStudentId(sId);
-            student.AddScore(cId, score);
+            student.AddScore(sId, cId, score);
         }
 
         /// <summary>

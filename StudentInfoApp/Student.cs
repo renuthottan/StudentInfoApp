@@ -56,10 +56,11 @@ namespace StudentInfoApp
         /// </summary>
         /// <param name="cId">course id</param>
         /// <param name="score">score obtained by student</param>
-        public void AddScore(int cId, int score)
+        public void AddScore(int sId, int cId, int score)
         {
             var cs = new CourseScore
             {
+                StudentId = sId,
                 CourseId = cId,
                 Score = score
             };
@@ -73,8 +74,13 @@ namespace StudentInfoApp
     /// </summary>
     class CourseScore
     {
-        public int CourseId;
-        public int Score;
-    
+        public int Id { get; set; }
+        public int StudentId { get; set; }
+        public int CourseId { get; set; }
+        public int Score { get; set; }
+        public virtual Student Student { get; set; }
+
+
+
     };
 }
