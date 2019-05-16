@@ -121,7 +121,7 @@ namespace StudentInfoApp
                             var studentScores = Admin.GetScoresForStudent(studentId);
                             foreach (var score in studentScores)
                             {
-                                Console.WriteLine($"Index: {score.Id},Student Id: {score.StudentId}, Course Id: {score.CourseId}, Score: {score.Score}");
+                                Console.WriteLine($"Student Id: {score.StudentId}, Course Id: {score.CourseId}, Score: {score.Score}");
                             }
                         }
                         catch (ArgumentNullException nx)
