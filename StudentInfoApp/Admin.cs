@@ -8,7 +8,7 @@ namespace StudentInfoApp
     /// <summary>
     /// Admin class is the factory class.
     /// </summary>
-    static class Admin
+    public static class Admin
     {
         private static AdminContext db = new AdminContext();
 

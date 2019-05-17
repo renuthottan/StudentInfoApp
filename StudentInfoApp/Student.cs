@@ -8,7 +8,7 @@ namespace StudentInfoApp
     /// <summary>
     /// Student class holds all student information
     /// </summary>
-    class Student
+    public class Student
 
     {
         /// <summary>

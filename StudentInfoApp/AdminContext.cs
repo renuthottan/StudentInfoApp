@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StudentInfoApp
 {
-    class AdminContext : DbContext
+    public class AdminContext : DbContext
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }

@@ -8,7 +8,7 @@ namespace StudentInfoApp
     /// Course holds information about all available courses
     /// Can add new courses
     /// </summary>
-    class Course
+    public class Course
     {
         
         #region Properties

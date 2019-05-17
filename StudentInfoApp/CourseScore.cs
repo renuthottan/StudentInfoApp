@@ -4,7 +4,7 @@ using System.Text;
 
 namespace StudentInfoApp
 {
-    class CourseScore
+    public class CourseScore
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
