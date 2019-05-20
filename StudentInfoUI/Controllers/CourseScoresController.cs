@@ -14,17 +14,12 @@ namespace StudentInfoUI.Controllers
 
     public class CourseScoresController : Controller
     {
-        private readonly AdminContext _context;
-
-        public CourseScoresController(AdminContext context)
-        {
-            _context = context;
-        }
+        
 
         // GET: CourseScores
         public async Task<IActionResult> Index()
         {
-            return View(Admin.GetScoresForStudent(1));
+            return View(Admin.GetAllScores());
 
         }
 
@@ -49,7 +44,6 @@ namespace StudentInfoUI.Controllers
         // GET: CourseScores/Create
         public IActionResult Create()
         {
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Address");
             return View();
         }
 
@@ -66,7 +60,6 @@ namespace StudentInfoUI.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Address", courseScore.StudentId);
             return View(courseScore);
         }
 
@@ -83,7 +76,6 @@ namespace StudentInfoUI.Controllers
             {
                 return NotFound();
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Address", courseScore.StudentId);
             return View(courseScore);
         }
 
@@ -108,7 +100,7 @@ namespace StudentInfoUI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseScoreExists(courseScore.Id))
+                    if (Admin.GetCourseScoreByScoreId(courseScore.Id) == null)
                     {
                         return NotFound();
                     }
@@ -119,43 +111,10 @@ namespace StudentInfoUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Address", courseScore.StudentId);
             return View(courseScore);
         }
 
-        // GET: CourseScores/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var courseScore = await _context.CourseScores
-                .Include(c => c.Student)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (courseScore == null)
-            {
-                return NotFound();
-            }
-
-            return View(courseScore);
-        }
-
-        // POST: CourseScores/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var courseScore = await _context.CourseScores.FindAsync(id);
-            _context.CourseScores.Remove(courseScore);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CourseScoreExists(int id)
-        {
-            return _context.CourseScores.Any(e => e.Id == id);
-        }
+       
     }
 }

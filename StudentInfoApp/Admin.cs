@@ -82,10 +82,11 @@ namespace StudentInfoApp
         /// Obtain all course info
         /// </summary>
         /// <returns>list of courses</returns>
-        public  static IEnumerable<Course> GetAllCourses()
+        public static IEnumerable<Course> GetAllCourses()
         {
             return db.Courses;
         }
+
 
         /// <summary>
         /// Adds score and course details to existing student profile
@@ -122,12 +123,18 @@ namespace StudentInfoApp
         }
 
 
-        public static IEnumerable<CourseScore>
+       /* public static IEnumerable<CourseScore>
             GetScoresForStudent(int sId)
         {
             return db.CourseScores
                 .Where(c => c.StudentId == sId);
+        }*/
+
+        public static IEnumerable<CourseScore> GetAllScores()
+        {
+            return db.CourseScores;
         }
+
 
         public static Course GetCourseByCourseId(int cId)
         {

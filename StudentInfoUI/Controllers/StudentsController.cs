@@ -13,13 +13,7 @@ namespace StudentInfoUI.Controllers
     [Authorize]
     public class StudentsController : Controller
     {
-        private readonly AdminContext _context;
-
-        public StudentsController(AdminContext context)
-        {
-            _context = context;
-        }
-
+       
         // GET: Students
         public async Task<IActionResult> Index()
         {
@@ -102,7 +96,7 @@ namespace StudentInfoUI.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.Id))
+                    if (Admin.GetStudentByStudentId(student.Id)==null)
                     {
                         return NotFound();
                     }
@@ -116,38 +110,6 @@ namespace StudentInfoUI.Controllers
             return View(student);
         }
 
-        // GET: Students/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
-            {
-                return NotFound();
-            }
-
-            return View(student);
-        }
-
-        // POST: Students/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var student = await _context.Students.FindAsync(id);
-            _context.Students.Remove(student);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.Id == id);
-        }
+       
     }
 }
