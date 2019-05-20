@@ -78,8 +78,8 @@ namespace StudentInfoApp
                     .IsRequired();
 
                 entity.HasOne(e => e.Student)
-                    .WithMany()
-                    .HasForeignKey(e => e.StudentId);
+                   .WithMany()
+                   .HasForeignKey(e => e.StudentId);
 
             });
 

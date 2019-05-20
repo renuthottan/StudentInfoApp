@@ -121,6 +121,7 @@ namespace StudentInfoApp
             return student;
         }
 
+
         public static IEnumerable<CourseScore>
             GetScoresForStudent(int sId)
         {
@@ -128,7 +129,60 @@ namespace StudentInfoApp
                 .Where(c => c.StudentId == sId);
         }
 
+        public static Course GetCourseByCourseId(int cId)
+        {
+            var course = db.Courses.SingleOrDefault(c => c.Id == cId);
+            if (course == null)
+            {
+                return null;
+            }
+            return course;
+        }
 
+        public static CourseScore GetCourseScoreByScoreId(int scoreId)
+        {
+            var courseScore = db.CourseScores.SingleOrDefault(cs => cs.Id == scoreId);
+            if (courseScore == null)
+            {
+                return null;
+            }
+            return courseScore;
+        }
+
+        public static Student UpdateStudent(Student updatedStudent)
+        {
+            var oldStudent =
+                GetStudentByStudentId(updatedStudent.Id);
+            oldStudent.Name = updatedStudent.Name;
+            oldStudent.Address = updatedStudent.Address;
+            oldStudent.Email = updatedStudent.Email;
+            oldStudent.Dob = updatedStudent.Dob;
+            db.SaveChanges();
+          
+            return oldStudent;
+        }
+        public static Course UpdateCourse(Course updatedCourse)
+        {
+            var oldCourse =
+                GetCourseByCourseId(updatedCourse.Id);
+            oldCourse.Name = updatedCourse.Name;
+            oldCourse.CreditHours = updatedCourse.CreditHours;
+            
+            db.SaveChanges();
+            return oldCourse;
+        }
+        public static CourseScore UpdateCourseScore(CourseScore updatedCourseScore)
+        {
+            var oldCourseScore =
+                GetCourseScoreByScoreId(updatedCourseScore.Id);
+            oldCourseScore.StudentId = updatedCourseScore.StudentId;
+            oldCourseScore.CourseId = updatedCourseScore.CourseId;
+            oldCourseScore.Score = updatedCourseScore.Score;
+
+
+            db.SaveChanges();
+            return oldCourseScore;
+        }
 
     }
 }

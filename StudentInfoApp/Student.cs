@@ -20,7 +20,7 @@ namespace StudentInfoApp
         /// <summary>
         /// unique id for student
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; set; }
         /// <summary>
         /// student first and last name
         /// </summary>

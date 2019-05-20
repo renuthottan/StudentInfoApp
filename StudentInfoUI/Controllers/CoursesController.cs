@@ -11,62 +11,62 @@ using StudentInfoApp;
 namespace StudentInfoUI.Controllers
 {
     [Authorize]
-    public class StudentsController : Controller
+
+    public class CoursesController : Controller
     {
         private readonly AdminContext _context;
 
-        public StudentsController(AdminContext context)
+        public CoursesController(AdminContext context)
         {
             _context = context;
         }
 
-        // GET: Students
+        // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(Admin.GetAllStudents());
+            return View(Admin.GetAllCourses());
         }
 
-        // GET: Students/Details/5
+        // GET: Courses/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
-            } 
+            }
 
-            var student = Admin.GetStudentByStudentId(id.Value);
-                                       
-            if (student == null)
+            var course = Admin.GetCourseByCourseId(id.Value);
+
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(course);
         }
 
-        // GET: Students/Create
+        // GET: Courses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
+        // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Name,Address,Email,Dob")] Student student)
+        public async Task<IActionResult> Create([Bind("Name,CreditHours")] Course course)
         {
             if (ModelState.IsValid)
             {
-                Admin.AddStudent(student.Name, student.Address, student.Email, student.Dob);
-
+                Admin.AddCourse(course.Name, course.CreditHours); 
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(course);
         }
 
-        // GET: Students/Edit/5
+        // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace StudentInfoUI.Controllers
                 return NotFound();
             }
 
-            var student = Admin.GetStudentByStudentId(id.Value);
-            if (student == null)
+            var course = Admin.GetCourseByCourseId(id.Value);
+            if (course == null)
             {
                 return NotFound();
             }
-            return View(student);
+            return View(course);
         }
 
-        // POST: Students/Edit/5
+        // POST: Courses/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,Email,Dob")] Student student)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CreditHours")] Course course)
         {
-            if (id != student.Id)
+            if (id != course.Id)
             {
                 return NotFound();
             }
@@ -98,11 +98,12 @@ namespace StudentInfoUI.Controllers
             {
                 try
                 {
-                    Admin.UpdateStudent(student);
+                    Admin.UpdateCourse(course);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StudentExists(student.Id))
+                    if (!CourseExists(course.Id))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace StudentInfoUI.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(course);
         }
 
-        // GET: Students/Delete/5
+        // GET: Courses/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +125,30 @@ namespace StudentInfoUI.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
+            var course = await _context.Courses
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (student == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return View(student);
+            return View(course);
         }
 
-        // POST: Students/Delete/5
+        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Students.FindAsync(id);
-            _context.Students.Remove(student);
+            var course = await _context.Courses.FindAsync(id);
+            _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
+        private bool CourseExists(int id)
         {
-            return _context.Students.Any(e => e.Id == id);
+            return _context.Courses.Any(e => e.Id == id);
         }
     }
 }

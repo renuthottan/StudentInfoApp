@@ -15,7 +15,7 @@ namespace StudentInfoApp
         /// <summary>
         /// unique id of the course
         /// </summary>
-        public int Id { get; private set; }
+        public int Id { get; set; }
         /// <summary>
         /// name of the course
         /// </summary>
